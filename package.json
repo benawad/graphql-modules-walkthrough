@@ -1,0 +1,33 @@
+{
+  "name": "graphql-modules-walkthrough",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/graphql": "^14.0.3",
+    "@types/mongodb": "^3.1.14",
+    "@types/mongoose": "^5.2.22",
+    "graphql-code-generator": "^0.13.0",
+    "graphql-codegen-typescript-resolvers-template": "^0.13.0",
+    "nodemon": "^1.18.5",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.4"
+  },
+  "dependencies": {
+    "@graphql-modules/epoxy": "^0.1.9",
+    "@graphql-modules/sonar": "^0.1.9",
+    "apollo-server-express": "^2.1.0",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "graphql-codegen-typescript-mongodb-template": "^0.13.0",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.8"
+  },
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "gen:schema": "ts-node src/schemaToFile.ts",
+    "gen:model:types": "gql-gen --template graphql-codegen-typescript-mongodb-template --schema ./schema.graphql --out ./src/modelTypes.ts",
+    "gen:resolver:types": "gql-gen --template graphql-codegen-typescript-resolvers-template --schema ./schema.graphql --out ./src/resolverTypes.ts",
+    "gen:all": "yarn gen:schema && yarn gen:model:types && yarn gen:resolver:types"
+  }
+}

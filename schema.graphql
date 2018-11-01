@@ -1,0 +1,38 @@
+directive @union(discriminatorField: String) on UNION
+
+directive @abstractEntity(discriminatorField: String!) on INTERFACE
+
+directive @entity(embedded: Boolean, additionalFields: [AdditionalEntityFields]) on OBJECT
+
+directive @column(name: String, overrideType: String, overrideIsArray: Boolean) on FIELD_DEFINITION
+
+directive @id on FIELD_DEFINITION
+
+directive @link on FIELD_DEFINITION
+
+directive @embedded on FIELD_DEFINITION
+
+directive @map(path: String!) on FIELD_DEFINITION
+
+input AdditionalEntityFields {
+  path: String
+  type: String
+}
+
+type Mutation {
+  addNote(text: String!): Note!
+}
+
+type Query {
+  notes: [Note!]!
+}
+
+type Note @entity {
+  id: String! @id @map(path: "_id")
+  text: String! @column
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
