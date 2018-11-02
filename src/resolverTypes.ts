@@ -54,6 +54,16 @@ export interface Note {
 
 export interface Mutation {
   addNote: Note;
+
+  login?: User | null;
+
+  register: User;
+}
+
+export interface User {
+  id: string;
+
+  username: string;
 }
 
 // ====================================================
@@ -72,6 +82,16 @@ export interface AdditionalEntityFields {
 
 export interface AddNoteMutationArgs {
   text: string;
+}
+export interface LoginMutationArgs {
+  username: string;
+
+  password: string;
+}
+export interface RegisterMutationArgs {
+  username: string;
+
+  password: string;
 }
 
 // ====================================================
@@ -116,6 +136,10 @@ export namespace NoteResolvers {
 export namespace MutationResolvers {
   export interface Resolvers<Context = any, TypeParent = never> {
     addNote?: AddNoteResolver<Note, TypeParent, Context>;
+
+    login?: LoginResolver<User | null, TypeParent, Context>;
+
+    register?: RegisterResolver<User, TypeParent, Context>;
   }
 
   export type AddNoteResolver<
@@ -126,4 +150,45 @@ export namespace MutationResolvers {
   export interface AddNoteArgs {
     text: string;
   }
+
+  export type LoginResolver<
+    R = User | null,
+    Parent = never,
+    Context = any
+  > = Resolver<R, Parent, Context, LoginArgs>;
+  export interface LoginArgs {
+    username: string;
+
+    password: string;
+  }
+
+  export type RegisterResolver<
+    R = User,
+    Parent = never,
+    Context = any
+  > = Resolver<R, Parent, Context, RegisterArgs>;
+  export interface RegisterArgs {
+    username: string;
+
+    password: string;
+  }
+}
+
+export namespace UserResolvers {
+  export interface Resolvers<Context = any, TypeParent = User> {
+    id?: IdResolver<string, TypeParent, Context>;
+
+    username?: UsernameResolver<string, TypeParent, Context>;
+  }
+
+  export type IdResolver<R = string, Parent = User, Context = any> = Resolver<
+    R,
+    Parent,
+    Context
+  >;
+  export type UsernameResolver<
+    R = string,
+    Parent = User,
+    Context = any
+  > = Resolver<R, Parent, Context>;
 }

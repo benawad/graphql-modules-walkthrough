@@ -1,4 +1,4 @@
 type Note @entity {
-  id: String! @id @map(path: "_id")
+  id: ID! @id
   text: String! @column
 }

@@ -17,3 +17,23 @@ export interface Note {
 export interface AddNoteMutationArgs {
   text: string;
 }
+
+export interface LoginMutationArgs {
+  username: string;
+  password: string;
+}
+
+export interface RegisterMutationArgs {
+  username: string;
+  password: string;
+}
+
+export interface UserDbObject {
+  _id: ObjectID;
+  username: string;
+}
+
+export interface User {
+  id: string;
+  username: string;
+}

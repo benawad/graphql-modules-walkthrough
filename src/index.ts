@@ -1,6 +1,7 @@
 import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
 import * as mongoose from "mongoose";
+import * as session from "express-session";
 
 import { schema } from "./schema";
 
@@ -12,6 +13,14 @@ const server = new ApolloServer({
 
 const app = express();
 server.applyMiddleware({ app });
+
+app.use(
+  session({
+    secret: "qoieujoiwjdlkasdl",
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)

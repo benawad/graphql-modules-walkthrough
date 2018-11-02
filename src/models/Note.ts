@@ -5,4 +5,6 @@ const NoteSchema = new Schema({
   text: String
 });
 
-export const NoteModel = model<NoteDbObject & Document>("Note", NoteSchema);
+export type NoteModelType = NoteDbObject & Document;
+
+export const NoteModel = model<NoteModelType>("Note", NoteSchema);

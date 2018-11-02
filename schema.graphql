@@ -21,6 +21,8 @@ input AdditionalEntityFields {
 
 type Mutation {
   addNote(text: String!): Note!
+  login(username: String!, password: String!): User
+  register(username: String!, password: String!): User!
 }
 
 type Query {
@@ -28,8 +30,13 @@ type Query {
 }
 
 type Note @entity {
-  id: String! @id @map(path: "_id")
+  id: ID! @id
   text: String! @column
+}
+
+type User @entity {
+  id: ID! @id
+  username: String! @column
 }
 
 schema {
