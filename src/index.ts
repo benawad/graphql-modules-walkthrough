@@ -2,10 +2,13 @@ import * as express from "express";
 import { ApolloServer } from "apollo-server-express";
 import * as mongoose from "mongoose";
 import * as session from "express-session";
+import * as ConnectMongo from "connect-mongo";
 
 import { schema } from "./schema";
 
 mongoose.connect("mongodb://localhost/test");
+
+const MongoStore = ConnectMongo(session);
 
 const server = new ApolloServer({
   schema,
@@ -18,7 +21,8 @@ app.use(
   session({
     secret: "qoieujoiwjdlkasdl",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 

@@ -15,7 +15,11 @@ const isAuthenticated: IMiddlewareFunction = async (
 };
 
 export const middleware: IMiddleware = {
+  Query: {
+    note: isAuthenticated
+  },
   Mutation: {
-    addNote: isAuthenticated
+    addNote: isAuthenticated,
+    shareNote: isAuthenticated
   }
 };

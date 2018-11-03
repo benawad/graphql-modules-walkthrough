@@ -1,4 +1,5 @@
 type User @entity {
   id: ID! @id
   username: String! @column
+  notes: [Note!]!
 }

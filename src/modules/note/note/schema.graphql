@@ -1,0 +1,3 @@
+type Query {
+  note(id: ID!): Note
+}

@@ -1,4 +1,6 @@
 type Note @entity {
   id: ID! @id
   text: String! @column
+  ownerId: String! @id @map(path: "_ownerId")
+  visible: Boolean! @column
 }

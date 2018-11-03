@@ -6,8 +6,12 @@ const resolvers: {
   Mutation: { addNote: MutationResolvers.AddNoteResolver<NoteDbObject> };
 } = {
   Mutation: {
-    addNote: (_, { text }) => {
-      return new NoteModel({ text }).save();
+    addNote: (_, { text, visible }, { req }) => {
+      return new NoteModel({
+        text,
+        visible,
+        _ownerId: req.session.userId
+      }).save();
     }
   }
 };

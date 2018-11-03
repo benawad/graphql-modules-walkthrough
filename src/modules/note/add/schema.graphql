@@ -1,3 +1,0 @@
-type Mutation {
-  addNote(text: String!): Note!
-}

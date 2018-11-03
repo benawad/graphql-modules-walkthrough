@@ -20,23 +20,29 @@ input AdditionalEntityFields {
 }
 
 type Mutation {
-  addNote(text: String!): Note!
+  addNote(text: String!, visible: Boolean): Note!
+  shareNote(noteId: ID!, userId: ID!, scopes: [String!]!): Boolean
   login(username: String!, password: String!): User
   register(username: String!, password: String!): User!
 }
 
 type Query {
+  note(id: ID!): Note
   notes: [Note!]!
+  me: User
 }
 
 type Note @entity {
   id: ID! @id
   text: String! @column
+  ownerId: String! @id @map(path: "_ownerId")
+  visible: Boolean! @column
 }
 
 type User @entity {
   id: ID! @id
   username: String! @column
+  notes: [Note!]!
 }
 
 schema {

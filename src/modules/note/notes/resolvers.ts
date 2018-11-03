@@ -11,7 +11,7 @@ const resolvers: {
   };
 } = {
   Query: {
-    notes: () => NoteModel.find()
+    notes: () => NoteModel.find({ visible: true })
   }
 };
 
